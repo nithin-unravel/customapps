@@ -1,0 +1,15 @@
+---
+- hosts: hosts
+  tasks:
+    - name: Fetch Index Name
+      shell: "curl localhost:4171/_cat/indices?v | grep app- | awk {'print $3'} | sort | tail -1" 
+      register: indexname
+    - debug: msg="{{ indexname.stdout }}"
+    - name: Copy Python Script
+      copy: 
+        src:  fetchlongrunning.py
+        dest: /tmp/fetchlongrunning.py
+    - name: Run Python Script
+      shell : 
+        cmd: "python3 fetchlongrunning.py {{ indexname.stdout }}"
+        chdir: /tmp
