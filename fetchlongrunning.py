@@ -16,7 +16,7 @@ hitsdata=r.json()['hits']['hits']
 for i in range(len(hitsdata)):
     app_id=hitsdata[i]['_source']['id']
     stat_time=hitsdata[i]['_source']['startTime']
-    app_duration=hitsdata[i]['_source']['duration']
+    app_duration=round((hitsdata[i]['_source']['duration'])/3600000,2)
     data = [app_id, stat_time, app_duration]
     with open('/tmp/appdata.csv', 'a', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
