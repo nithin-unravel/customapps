@@ -14,5 +14,6 @@
   - name: Print if there are any failures 
     debug:
       msg: "List of checks that failed {{failed_list.stdout}}"
+    tags: getstatus
 
 
