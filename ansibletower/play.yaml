@@ -1,0 +1,18 @@
+---
+- hosts: hosts
+  tasks:
+  - name: Validate the existance of file
+    stat : 
+      path: "/opt/unravel/data/apps/UnravelStatusDashboard/unravel_status_dashboard/data"
+    register: file_status
+
+  - name: Check For Failures in file_status
+    shell: python /opt/unravel/data/apps/UnravelStatusDashboard/unravel_status_dashboard/data/parseoutput.py
+    register: failed_list
+    when: file_status.stat.exists
+  
+  - name: Print if there are any failures 
+    debug:
+      msg: "List of checks that failed {{failed_list.stdout}}"
+
+
