@@ -1,5 +1,5 @@
 ---
-- hosts: citi06.unraveldata.com
+- hosts:  citi06test
   tasks:
   - name: Validate the existance of file
     stat : 
