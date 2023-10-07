@@ -15,8 +15,4 @@
     debug:
       msg: "List of checks that failed {{failed_list.stdout}}"
 
-  - name: Capture STDOUT
-    set_fact:
-      last_task_stdout: "{{ ansible_play_batch | select('failed', 'skipped', 'ok') | map('stdout') | last }}"
-
 
